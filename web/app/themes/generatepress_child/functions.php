@@ -34,4 +34,19 @@ function remove_woocommerce_prefetch_hints($hints, $relation_type) {
     }
     return $hints;
 }
+// Remove prefetchs do WordPress core (wp-includes/js/dist/)
+add_filter('wp_resource_hints', function($hints, $relation_type) {
+    if ('prefetch' === $relation_type) {
+        foreach ($hints as $key => $hint) {
+            if (is_string($hint) && strpos($hint, '/wp-includes/js/dist/') !== false) {
+                unset($hints[$key]);
+            } elseif (is_array($hint) && isset($hint['href']) && strpos($hint['href'], '/wp-includes/js/dist/') !== false) {
+                unset($hints[$key]);
+            }
+        }
+        $hints = array_values($hints);
+    }
+    return $hints;
+}, 10, 2);
+
 ?>
