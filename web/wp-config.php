@@ -9,3 +9,6 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 require_once dirname(__DIR__) . '/config/application.php';
 require_once ABSPATH . 'wp-settings.php';
 define('WP_REDIS_PREFIX', 'meu_site_');
+
+define('WP_HOME', 'https://wordpress.hexcommerce.com.br');
+define('WP_SITEURL', 'https://wordpress.hexcommerce.com.br');
