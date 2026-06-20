@@ -11,7 +11,7 @@ function remove_woocommerce_block_assets() {
     wp_dequeue_style('wc-blocks-style-css');
     wp_dequeue_style('classic-theme-styles');
     
-    // Desregistra os scripts dos blocos (incluindo prefetch)
+    // Desregistra os scripts dos blocos
     wp_dequeue_script('wc-blocks-middleware');
     wp_dequeue_script('wc-blocks-data-store');
     wp_dequeue_script('wc-blocks-registry');
@@ -19,13 +19,9 @@ function remove_woocommerce_block_assets() {
     wp_dequeue_script('wc-blocks-shared-context');
     wp_dequeue_script('wc-blocks-shared-hocs');
     wp_dequeue_script('price-format');
-    // Adicione outros se necessário
 }
 
-// Remove o prefetch de scripts do carrinho/checkout (gerados pelo WooCommerce Blocks)
-add_filter('woocommerce_blocks_asset_path', '__return_empty_string');
-
-// Remove os prefetch links gerados pelo WordPress (se houver)
+// Remove os prefetch links gerados pelo WordPress
 add_filter('wp_resource_hints', function($hints, $relation_type) {
     if ('prefetch' === $relation_type) {
         $hints = array_filter($hints, function($hint) {
@@ -34,3 +30,4 @@ add_filter('wp_resource_hints', function($hints, $relation_type) {
     }
     return $hints;
 }, 10, 2);
+?>
