@@ -44,6 +44,9 @@
     "roots/wp-config": "^1.0",
     "vlucas/phpdotenv": "^5.0",
     "wp-theme/twentytwentyfive": "^1.0",
+    "wpackagist-plugin/clp-varnish-cache": "^1.1",
+    "wpackagist-plugin/redis-cache": "^2.8",
+    "wpackagist-plugin/wp-cloudflare-page-cache": "^5.3",
     "wpackagist-theme/generatepress": "^3.6"
   },
   "require-dev": {
