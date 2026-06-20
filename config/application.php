@@ -66,6 +66,14 @@ if (file_exists($root_dir . '/.env')) {
 define('WP_ENV', env('WP_ENV') ?: 'production');
 define('WP_CACHE', env('WP_CACHE') ?: false);
 
+// Remover cabeçalhos que impedem cache
+add_filter('nocache_headers', function($headers) {
+    unset($headers['Cache-Control']);
+    unset($headers['Pragma']);
+    unset($headers['Expires']);
+    return $headers;
+});
+
 /**
  * Set WP_ENVIRONMENT_TYPE if not already defined
  */
