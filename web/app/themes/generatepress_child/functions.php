@@ -20,4 +20,15 @@ function remove_woocommerce_block_assets() {
     wp_dequeue_script('wc-blocks-shared-hocs');
     wp_dequeue_script('price-format');
 }
+
+add_filter('wp_resource_hints', function($hints, $relation_type) {
+    if ('prefetch' === $relation_type) {
+        $hints = array_filter($hints, function($hint) {
+            return strpos($hint, 'woocommerce') === false;
+        });
+    }
+    return $hints;
+}, 10, 2);
+
+
 ?>
