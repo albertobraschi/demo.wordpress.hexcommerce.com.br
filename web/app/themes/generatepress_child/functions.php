@@ -49,4 +49,11 @@ add_filter('wp_resource_hints', function($hints, $relation_type) {
     return $hints;
 }, 10, 2);
 
+// Remove emoji CSS e JS
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
+
+
+
+
 ?>
