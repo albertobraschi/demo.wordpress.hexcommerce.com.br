@@ -1,17 +1,15 @@
 <?php
 /**
- * GeneratePress Child Theme functions
+ * GeneratePress Child Theme
  */
 
-// Remove os prefetchs e scripts de bloco do WooCommerce
+// Remove estilos e scripts dos blocos do WooCommerce
 add_action('wp_enqueue_scripts', 'remove_woocommerce_block_assets', 999);
 function remove_woocommerce_block_assets() {
-    // Desregistra os estilos dos blocos
     wp_dequeue_style('wc-blocks-style');
     wp_dequeue_style('wc-blocks-style-css');
     wp_dequeue_style('classic-theme-styles');
     
-    // Desregistra os scripts dos blocos
     wp_dequeue_script('wc-blocks-middleware');
     wp_dequeue_script('wc-blocks-data-store');
     wp_dequeue_script('wc-blocks-registry');
@@ -21,14 +19,19 @@ function remove_woocommerce_block_assets() {
     wp_dequeue_script('price-format');
 }
 
-add_filter('wp_resource_hints', function($hints, $relation_type) {
+// Remove os prefetch links do WooCommerce (versão que trata arrays)
+add_filter('wp_resource_hints', 'remove_woocommerce_prefetch_hints', 10, 2);
+function remove_woocommerce_prefetch_hints($hints, $relation_type) {
     if ('prefetch' === $relation_type) {
-        $hints = array_filter($hints, function($hint) {
-            return strpos($hint, 'woocommerce') === false;
-        });
+        foreach ($hints as $key => $hint) {
+            if (is_string($hint) && strpos($hint, 'woocommerce') !== false) {
+                unset($hints[$key]);
+            } elseif (is_array($hint) && isset($hint['href']) && strpos($hint['href'], 'woocommerce') !== false) {
+                unset($hints[$key]);
+            }
+        }
+        $hints = array_values($hints);
     }
     return $hints;
-}, 10, 2);
-
-
+}
 ?>
