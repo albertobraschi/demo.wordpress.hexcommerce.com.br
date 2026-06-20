@@ -64,6 +64,7 @@ if (file_exists($root_dir . '/.env')) {
  * Default: production
  */
 define('WP_ENV', env('WP_ENV') ?: 'production');
+define('WP_CACHE', env('WP_CACHE') ?: false);
 
 /**
  * Set WP_ENVIRONMENT_TYPE if not already defined
