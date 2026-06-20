@@ -53,22 +53,34 @@ add_filter('wp_resource_hints', function($hints, $relation_type) {
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
-add_action('wp_head', function() {
-    if (is_product()) {
-        global $product;
-        if ($product) {
-            $image_id = $product->get_image_id();
-            if ($image_id) {
-                $image_url = wp_get_attachment_image_url($image_id, 'full');
-                if ($image_url) {
-                    echo '<link rel="preload" as="image" href="' . esc_url($image_url) . '" fetchpriority="high">';
-                }
-            }
-        }
+add_action('wp_head', 'preload_product_image', 1);
+
+function preload_product_image() {
+    // Verifica se é uma página de produto single
+    if (!is_product()) {
+        return;
     }
-}, 1);
 
+    // Obtém o objeto do produto de forma confiável
+    $product = wc_get_product(get_queried_object_id());
+    
+    // Se não for um produto válido, sai da função
+    if (!$product || !is_a($product, 'WC_Product')) {
+        return;
+    }
 
+    // Obtém o ID da imagem destacada
+    $image_id = $product->get_image_id();
+    if (!$image_id) {
+        return;
+    }
+
+    // Obtém a URL da imagem no tamanho completo
+    $image_url = wp_get_attachment_image_url($image_id, 'full');
+    if ($image_url) {
+        echo '<link rel="preload" as="image" href="' . esc_url($image_url) . '" fetchpriority="high">';
+    }
+}
 
 
 ?>
