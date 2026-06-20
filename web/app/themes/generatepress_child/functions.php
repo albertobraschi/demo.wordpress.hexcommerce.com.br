@@ -53,6 +53,21 @@ add_filter('wp_resource_hints', function($hints, $relation_type) {
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
+add_action('wp_head', function() {
+    if (is_product()) {
+        global $product;
+        if ($product) {
+            $image_id = $product->get_image_id();
+            if ($image_id) {
+                $image_url = wp_get_attachment_image_url($image_id, 'full');
+                if ($image_url) {
+                    echo '<link rel="preload" as="image" href="' . esc_url($image_url) . '" fetchpriority="high">';
+                }
+            }
+        }
+    }
+}, 1);
+
 
 
 
