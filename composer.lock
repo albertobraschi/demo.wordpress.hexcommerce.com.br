@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36147723349bfb017a3bf11889d6737f",
+    "content-hash": "93b59d214b9f24f009a476b5ffb66f1b",
     "packages": [
         {
             "name": "composer/installers",
@@ -1140,6 +1140,60 @@
             "homepage": "https://wordpress.org/plugins/redis-cache/"
         },
         {
+            "name": "wpackagist-plugin/shopboost-surprise-hesitating-visitors",
+            "version": "1.1.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/shopboost-surprise-hesitating-visitors/",
+                "reference": "tags/1.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/shopboost-surprise-hesitating-visitors.1.1.0.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/shopboost-surprise-hesitating-visitors/"
+        },
+        {
+            "name": "wpackagist-plugin/virtuaria-correios",
+            "version": "1.13.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/virtuaria-correios/",
+                "reference": "tags/1.13.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/virtuaria-correios.1.13.4.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/virtuaria-correios/"
+        },
+        {
+            "name": "wpackagist-plugin/woo-boost-sales",
+            "version": "1.2.19",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/woo-boost-sales/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/woo-boost-sales.zip?timestamp=1781943108"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/woo-boost-sales/"
+        },
+        {
             "name": "wpackagist-plugin/woocommerce",
             "version": "10.8.1",
             "source": {
@@ -1156,6 +1210,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/woocommerce/"
+        },
+        {
+            "name": "wpackagist-plugin/woocommerce-mercadopago",
+            "version": "8.7.24",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/woocommerce-mercadopago/",
+                "reference": "tags/8.7.24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce-mercadopago.8.7.24.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/woocommerce-mercadopago/"
         },
         {
             "name": "wpackagist-theme/generatepress",
