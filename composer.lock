@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93b59d214b9f24f009a476b5ffb66f1b",
+    "content-hash": "cc7f8d9667b42e5ca55d6b74b85371a3",
     "packages": [
         {
             "name": "composer/installers",
@@ -213,61 +213,6 @@
                 }
             ],
             "time": "2025-12-27T19:43:20+00:00"
-        },
-        {
-            "name": "oscarotero/env",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oscarotero/env.git",
-                "reference": "9f7d85cc6890f06a65bad4fe0077c070d596e4a4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oscarotero/env/zipball/9f7d85cc6890f06a65bad4fe0077c070d596e4a4",
-                "reference": "9f7d85cc6890f06a65bad4fe0077c070d596e4a4",
-                "shasum": ""
-            },
-            "require": {
-                "ext-ctype": "*",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "phpunit/phpunit": ">=7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/env_function.php"
-                ],
-                "psr-4": {
-                    "Env\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Oscar Otero",
-                    "email": "oom@oscarotero.com",
-                    "homepage": "http://oscarotero.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Simple library to consume environment variables",
-            "homepage": "https://github.com/oscarotero/env",
-            "keywords": [
-                "env"
-            ],
-            "support": {
-                "email": "oom@oscarotero.com",
-                "issues": "https://github.com/oscarotero/env/issues",
-                "source": "https://github.com/oscarotero/env/tree/v2.1.1"
-            },
-            "time": "2024-12-03T01:02:28+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -1040,32 +985,6 @@
                 }
             ],
             "time": "2025-12-27T19:49:13+00:00"
-        },
-        {
-            "name": "wp-theme/twentytwentyfive",
-            "version": "1.5",
-            "source": {
-                "type": "svn",
-                "url": "https://themes.svn.wordpress.org/twentytwentyfive/",
-                "reference": "1.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/twentytwentyfive.1.5.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0|~2.0"
-            },
-            "type": "wordpress-theme",
-            "notification-url": "https://wp-packages.org/downloads",
-            "description": "Twenty Twenty-Five emphasizes simplicity and adaptability. It offers flexible design options, supported by a variety of patterns for different page types, such as services and landing pages, making it ideal for building personal blogs, professional portfolios, online magazines, or business websites. Its templates cater to various blog styles, from text-focused to image-heavy layouts. Additionally, it supports international typography and diverse color palettes, ensuring accessibility and customization for users worldwide.",
-            "homepage": "https://wordpress.org/themes/twentytwentyfive/",
-            "support": {
-                "changelog": "https://wordpress.org/themes/twentytwentyfive/#developers",
-                "issues": "https://wordpress.org/support/theme/twentytwentyfive",
-                "source": "https://themes.svn.wordpress.org/twentytwentyfive"
-            },
-            "time": "2026-05-20T21:56:34+00:00"
         },
         {
             "name": "wpackagist-plugin/brazilian-checkout-toolkit-for-woocommerce",

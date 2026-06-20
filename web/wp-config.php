@@ -9,4 +9,4 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 require_once dirname(__DIR__) . '/config/application.php';
 require_once ABSPATH . 'wp-settings.php';
 define('WP_REDIS_PREFIX', 'meu_site_');
-
+define('DISABLE_WP_CRON', true);
