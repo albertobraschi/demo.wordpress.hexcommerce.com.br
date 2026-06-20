@@ -1,7 +1,7 @@
 <?php 
 defined( 'ABSPATH' ) || exit;
 return array (
-  'homepage' => 'https://demo.wordpress.hexcommerce.com.br/wp',
+  'homepage' => 'https://wordpress.hexcommerce.com.br/wp',
   'cache_options' => 
   array (
     'breeze-active' => '1',
@@ -32,7 +32,6 @@
     'breeze-exclude-css' => 
     array (
     ),
-    'breeze-include-inline-css' => '1',
     'breeze-minify-js' => '1',
     'breeze-group-js' => '0',
     'breeze-include-inline-js' => '1',
@@ -46,6 +45,10 @@
     array (
     ),
     'breeze-enable-js-delay' => '0',
+    'no-breeze-no-delay-js' => 
+    array (
+    ),
+    'breeze-delay-all-js' => '1',
     'breeze-delay-js-scripts' => 
     array (
       0 => 'gtag',
@@ -81,10 +84,7 @@
       30 => 'data-noptimize',
       31 => 'googletagmanager',
     ),
-    'no-breeze-no-delay-js' => 
-    array (
-    ),
-    'breeze-delay-all-js' => '1',
+    'breeze-include-inline-css' => '1',
     'breeze-preload-fonts' => 
     array (
     ),
