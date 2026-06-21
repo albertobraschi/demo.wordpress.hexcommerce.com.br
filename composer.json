@@ -46,6 +46,7 @@
     "wpackagist-plugin/brazilian-checkout-toolkit-for-woocommerce": "^1.1",
     "wpackagist-plugin/breeze": "^2.5",
     "wpackagist-plugin/clp-varnish-cache": "^1.1",
+    "wpackagist-plugin/ewww-image-optimizer": "^8.7",
     "wpackagist-plugin/redis-cache": "^2.8",
     "wpackagist-plugin/shopboost-surprise-hesitating-visitors": "^1.1",
     "wpackagist-plugin/virtuaria-correios": "^1.13",

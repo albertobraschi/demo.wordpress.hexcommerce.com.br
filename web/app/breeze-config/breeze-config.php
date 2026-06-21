@@ -6,7 +6,7 @@
   array (
     'breeze-active' => '1',
     'breeze-mobile-separate' => '1',
-    'breeze-cross-origin' => '0',
+    'breeze-cross-origin' => '1',
     'breeze-disable-admin' => 
     array (
       'administrator' => 0,
@@ -14,6 +14,8 @@
       'author' => 0,
       'contributor' => 0,
       'subscriber' => 0,
+      'customer' => 0,
+      'shop_manager' => 0,
     ),
     'breeze-gzip-compression' => '1',
     'breeze-browser-cache' => '1',
@@ -32,8 +34,9 @@
     'breeze-exclude-css' => 
     array (
     ),
+    'breeze-include-inline-css' => '1',
     'breeze-minify-js' => '1',
-    'breeze-group-js' => '0',
+    'breeze-group-js' => '1',
     'breeze-include-inline-js' => '1',
     'breeze-exclude-js' => 
     array (
@@ -45,10 +48,6 @@
     array (
     ),
     'breeze-enable-js-delay' => '0',
-    'no-breeze-no-delay-js' => 
-    array (
-    ),
-    'breeze-delay-all-js' => '1',
     'breeze-delay-js-scripts' => 
     array (
       0 => 'gtag',
@@ -84,7 +83,10 @@
       30 => 'data-noptimize',
       31 => 'googletagmanager',
     ),
-    'breeze-include-inline-css' => '1',
+    'no-breeze-no-delay-js' => 
+    array (
+    ),
+    'breeze-delay-all-js' => '0',
     'breeze-preload-fonts' => 
     array (
     ),
@@ -98,11 +100,11 @@
     'cached-query-strings' => 
     array (
     ),
-    'breeze-wp-emoji' => '1',
-    'breeze-store-googlefonts-locally' => '1',
-    'breeze-store-googleanalytics-locally' => '1',
-    'breeze-store-facebookpixel-locally' => '1',
-    'breeze-store-gravatars-locally' => '1',
+    'breeze-wp-emoji' => '0',
+    'breeze-store-googlefonts-locally' => '0',
+    'breeze-store-googleanalytics-locally' => '0',
+    'breeze-store-facebookpixel-locally' => '0',
+    'breeze-store-gravatars-locally' => '0',
     'breeze-enable-api' => '0',
     'breeze-api-token' => 'x3wjsDS4nmsSfE4LVC4rO6BIahGZ9vVb',
     'breeze-control-heartbeat' => '0',
@@ -121,7 +123,7 @@
       0 => '.php',
     ),
     'cdn-relative-path' => '1',
-    'auto-purge-varnish' => '0',
+    'auto-purge-varnish' => '1',
     'breeze-varnish-server-ip' => '127.0.0.1',
   ),
   'disable_per_adminuser' => 
@@ -131,6 +133,8 @@
     'author' => 0,
     'contributor' => 0,
     'subscriber' => 0,
+    'customer' => 0,
+    'shop_manager' => 0,
   ),
   'exclude_url' => 
   array (
@@ -159,6 +163,7 @@
   array (
     'x-frame-options' => 'SAMEORIGIN',
     'referrer-policy' => 'same-origin',
+    'strict-transport-security' => 'max-age=15552000; includeSubDomains; preload',
     'x-content-type-options' => 'nosniff',
     'x-xss-protection' => '1; mode=block',
   ),
