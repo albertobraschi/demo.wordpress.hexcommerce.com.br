@@ -10,6 +10,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Build CSS from an array of rules.
+ *
+ * @param array $rules Array of CSS rules where key is selector and value is properties array.
+ * @return string CSS string.
+ */
+function generateblocks_pro_build_css_from_array( $rules ) {
+	$css = '';
+
+	foreach ( $rules as $selector => $properties ) {
+		$css .= $selector . '{';
+		foreach ( $properties as $property => $value ) {
+			$css .= $property . ':' . $value . ';';
+		}
+		$css .= '}';
+	}
+
+	return $css;
+}
+
+/**
  * Get our effect selectors.
  *
  * @since 1.0.0
@@ -414,4 +434,142 @@ function generateblocks_pro_has_legacy_patterns() {
 	return wp_count_posts( 'gblocks_templates' )->publish > 0 ||
 		wp_count_posts( 'gblocks_templates' )->draft > 0 ||
 		wp_count_posts( 'gblocks_templates' )->trash > 0;
+}
+
+/**
+ * Get inline CSS for blocks as a pure string without using filters.
+ * This allows CSS generation for specific content without side effects.
+ *
+ * @since 2.3.0
+ * @param string|array $content The content to parse (can be raw content or parsed blocks).
+ * @return string The generated CSS.
+ */
+function generateblocks_pro_get_css_from_content( $content ) {
+	// Short circuit if GenerateBlocks adds this function in the future.
+	if ( function_exists( 'generateblocks_get_css_from_content' ) ) {
+		return generateblocks_get_css_from_content( $content );
+	}
+
+	if ( ! function_exists( 'generateblocks_get_block_data' ) ) {
+		return '';
+	}
+
+	// Parse blocks if we received raw content.
+	$parsed_blocks = is_array( $content ) ? $content : parse_blocks( $content );
+	$data = generateblocks_get_block_data( $parsed_blocks );
+
+	if ( empty( $data ) ) {
+		return '';
+	}
+
+	$css = '';
+	$css_data = array();
+
+	$blocks = apply_filters(
+		'generateblocks_dynamic_css_blocks',
+		array(
+			'text'               => 'GenerateBlocks_Block_Text',
+			'element'            => 'GenerateBlocks_Block_Element',
+			'media'              => 'GenerateBlocks_Block_Media',
+			'shape'              => 'GenerateBlocks_Block_Shape',
+			'query'              => 'GenerateBlocks_Block_Query',
+			'looper'             => 'GenerateBlocks_Block_Looper',
+			'query-page-numbers' => 'GenerateBlocks_Block_Query_Page_Numbers',
+			'loop-item'          => 'GenerateBlocks_Block_Loop_Item',
+		)
+	);
+
+	// Legacy blocks that use get_css_data().
+	$legacy_blocks = array(
+		'grid'             => 'GenerateBlocks_Block_Grid',
+		'container'        => 'GenerateBlocks_Block_Container',
+		'button-container' => 'GenerateBlocks_Block_Button_Container',
+		'button'           => 'GenerateBlocks_Block_Button',
+		'headline'         => 'GenerateBlocks_Block_Headline',
+		'image'            => 'GenerateBlocks_Block_Image',
+	);
+
+	// Process each block type.
+	foreach ( $data as $block_type => $block_instances ) {
+		// Handle modern blocks.
+		if ( isset( $blocks[ $block_type ] ) ) {
+			$class_name = $blocks[ $block_type ];
+
+			if ( class_exists( $class_name ) && is_callable( array( $class_name, 'get_css' ) ) ) {
+				foreach ( $block_instances as $attributes ) {
+					$block_css = $class_name::get_css( $attributes );
+
+					if ( $block_css ) {
+						$css .= wp_strip_all_tags( $block_css );
+					}
+				}
+			}
+		} elseif ( isset( $legacy_blocks[ $block_type ] ) ) {
+			// Handle legacy blocks.
+			$class_name = $legacy_blocks[ $block_type ];
+
+			if ( class_exists( $class_name ) && is_callable( array( $class_name, 'get_css_data' ) ) ) {
+				foreach ( $block_instances as $attributes ) {
+					$block_css_data = $class_name::get_css_data( $attributes );
+
+					if ( $block_css_data && function_exists( 'generateblocks_group_css_data' ) ) {
+						$css_data = generateblocks_group_css_data( $css_data, $block_css_data );
+					}
+				}
+			}
+		}
+	}
+
+	// Compile legacy block CSS data if we have any.
+	if ( ! empty( $css_data ) && function_exists( 'generateblocks_get_compiled_css' ) ) {
+		$css .= generateblocks_get_compiled_css( $css_data );
+	}
+
+	return $css;
+}
+
+/**
+ * Check if the overlay panels feature is enabled.
+ *
+ * @since 2.4.0
+ * @return bool Whether overlay panels are enabled.
+ */
+function generateblocks_pro_overlays_enabled() {
+	// Bail early if the function doesn't exist.
+	if ( ! function_exists( 'generateblocks_get_option' ) ) {
+		return true;
+	}
+
+	$enabled = generateblocks_get_option( 'enable_overlay_panels' );
+
+	// If explicitly set to false, respect that.
+	if ( false === $enabled ) {
+		return false;
+	}
+
+	// Default to true for null or any other value.
+	return true;
+}
+
+/**
+ * Check if the block conditions feature is enabled.
+ *
+ * @since 2.4.0
+ * @return bool Whether block conditions are enabled.
+ */
+function generateblocks_pro_block_conditions_enabled() {
+	// Bail early if the function doesn't exist.
+	if ( ! function_exists( 'generateblocks_get_option' ) ) {
+		return true;
+	}
+
+	$enabled = generateblocks_get_option( 'enable_block_conditions' );
+
+	// If explicitly set to false, respect that.
+	if ( false === $enabled ) {
+		return false;
+	}
+
+	// Default to true for null or any other value.
+	return true;
 }

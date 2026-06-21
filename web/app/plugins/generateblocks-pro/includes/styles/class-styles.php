@@ -25,7 +25,7 @@ class GenerateBlocks_Pro_Styles extends GenerateBlocks_Pro_Singleton {
 		add_action( 'generateblocks_dashboard_tabs', [ $this, 'add_tab' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_filter( 'generateblocks_dashboard_screens', [ $this, 'add_to_dashboard_pages' ] );
-		add_filter( 'block_editor_settings_all', [ $this, 'add_editor_styles_css' ], 20 );
+		add_filter( 'block_editor_settings_all', [ $this, 'add_editor_styles_css' ], 21 );
 
 		// Add global classes to dynamic elements.
 		add_filter( 'generateblocks_attr_container', [ $this, 'add_global_class_names' ], 10, 2 );
@@ -141,30 +141,19 @@ class GenerateBlocks_Pro_Styles extends GenerateBlocks_Pro_Singleton {
 	 * @param array $custom_args Any custom args to be passed to the query.
 	 */
 	public static function get_styles( array $custom_args = [] ) {
-		$args = array_merge(
-			[
-				'post_type'      => 'gblocks_styles',
-				'posts_per_page' => apply_filters( 'generateblocks_styles_posts_per_page', 150 ), // phpcs:ignore
-				'post_status'    => 'publish',
-				'order'          => 'ASC',
-				'orderby'        => 'menu_order',
-
-			],
-			$custom_args
-		);
-
-		$query  = new WP_Query( $args );
 		$styles = [];
 
-		// Create an array of styles from the CPT query.
-		foreach ( (array) $query->posts as $post ) {
-			$styles[] = [
-				'ID'         => $post->ID,
-				'style'      => $post->post_title,
-				'status'     => $post->post_status,
-				'menu_order' => $post->menu_order,
-			];
-		}
+		self::loop_styles(
+			function ( $post, $meta ) use ( &$styles ) {
+				$styles[] = [
+					'ID'         => $post->ID,
+					'style'      => $post->post_title,
+					'status'     => $post->post_status,
+					'menu_order' => $post->menu_order,
+				];
+			},
+			$custom_args
+		);
 
 		return $styles;
 	}
@@ -181,13 +170,17 @@ class GenerateBlocks_Pro_Styles extends GenerateBlocks_Pro_Singleton {
 			return $cached_css;
 		}
 
-		$classes = self::get_styles();
 		$css = '';
 
-		foreach ( (array) $classes as $class ) {
-			$class_css = get_post_meta( $class['ID'], 'gb_style_css', true );
-			$css .= $class_css;
-		}
+		self::loop_styles(
+			function ( $post, $meta ) use ( &$css ) {
+				if ( isset( $meta['gb_style_css'] ) ) {
+					$css .= $meta['gb_style_css'];
+				}
+			},
+			[],
+			[ 'gb_style_css' ]
+		);
 
 		// Cache our results.
 		update_option( 'generateblocks_style_css', $css );
@@ -204,16 +197,23 @@ class GenerateBlocks_Pro_Styles extends GenerateBlocks_Pro_Singleton {
 	 * @param array $editor_settings Existing editor settings.
 	 */
 	public function add_editor_styles_css( $editor_settings ) {
-		$classes = self::get_styles();
+		self::loop_styles(
+			function ( $post, $meta ) use ( &$editor_settings ) {
+				$class_css  = $meta['gb_style_css'] ?? '';
+				$class_name = $meta['gb_style_selector'] ?? '';
 
-		foreach ( (array) $classes as $class ) {
-			$class_css = get_post_meta( $class['ID'], 'gb_style_css', true );
-			$class_name = get_post_meta( $class['ID'], 'gb_style_selector', true );
-			$editor_settings['styles'][] = [
-				'css' => $class_css,
-				'source' => 'gb_class:' . $class_name,
-			];
-		}
+				if ( '' === $class_css || '' === $class_name ) {
+					return;
+				}
+
+				$editor_settings['styles'][] = [
+					'css'    => $class_css,
+					'source' => 'gb_class:' . $class_name,
+				];
+			},
+			[],
+			[ 'gb_style_css', 'gb_style_selector' ]
+		);
 
 		return $editor_settings;
 	}
@@ -285,6 +285,102 @@ class GenerateBlocks_Pro_Styles extends GenerateBlocks_Pro_Singleton {
 		}
 
 		return $query->posts[0];
+	}
+
+	/**
+	 * Iterate over styles in batches to avoid memory issues with unlimited queries.
+	 *
+	 * @param callable $callback   Callback executed for every post. Receives the post object and an array of meta values.
+	 * @param array    $custom_args Optional WP_Query args (supports all standard args).
+	 * @param array    $meta_keys   Meta keys to retrieve for each post.
+	 *
+	 * @return void
+	 */
+	private static function loop_styles( callable $callback, array $custom_args = [], array $meta_keys = [] ) {
+		$defaults = [
+			'post_type'      => 'gblocks_styles',
+			'post_status'    => 'publish',
+			'order'          => 'ASC',
+			'orderby'        => 'menu_order',
+			'posts_per_page' => apply_filters( 'generateblocks_styles_posts_per_page', 5000 ), // phpcs:ignore WordPress.WP.PostsPerPage.posts_per_page_posts_per_page
+		];
+
+		$args       = wp_parse_args( $custom_args, $defaults );
+		$batch_size = apply_filters( 'generateblocks_styles_batch_size', 200 );
+		$posts_per_page = isset( $args['posts_per_page'] ) ? (int) $args['posts_per_page'] : 0;
+		$args['posts_per_page'] = $posts_per_page;
+
+		// Batch if unlimited requested OR if limit is larger than batch size.
+		if ( 0 === $posts_per_page || -1 === $posts_per_page || $posts_per_page > $batch_size ) {
+			$original_posts_per_page = $posts_per_page;
+			$offset                  = isset( $args['offset'] ) ? (int) $args['offset'] : 0;
+
+			if ( ! empty( $args['paged'] ) && $original_posts_per_page > 0 ) {
+				$offset += ( (int) $args['paged'] - 1 ) * $original_posts_per_page;
+			}
+
+			unset( $args['offset'], $args['paged'] );
+
+			$remaining      = $original_posts_per_page > 0 ? $original_posts_per_page : null;
+			$current_offset = $offset;
+
+			do {
+				$limit = null === $remaining ? $batch_size : min( $batch_size, $remaining );
+
+				$query_args = $args;
+				$query_args['posts_per_page'] = $limit;
+				$query_args['offset']         = $current_offset;
+
+				$query = new WP_Query( $query_args );
+
+				if ( empty( $query->posts ) ) {
+					break;
+				}
+
+				// Prime meta cache to avoid N+1 queries.
+				if ( ! empty( $meta_keys ) ) {
+					update_meta_cache( 'post', wp_list_pluck( $query->posts, 'ID' ) );
+				}
+
+				foreach ( $query->posts as $post ) {
+					$meta = [];
+
+					foreach ( $meta_keys as $key ) {
+						$meta[ $key ] = get_post_meta( $post->ID, $key, true );
+					}
+
+					$callback( $post, $meta );
+				}
+
+				$posts_count = count( $query->posts );
+				$current_offset += $posts_count;
+
+				if ( null !== $remaining ) {
+					$remaining -= $posts_count;
+
+					if ( $remaining <= 0 ) {
+						break;
+					}
+				}
+			} while ( $posts_count === $limit );
+		} else {
+			// If specific limit requested, just do single query.
+			$query = new WP_Query( $args );
+
+			if ( ! empty( $meta_keys ) ) {
+				update_meta_cache( 'post', wp_list_pluck( $query->posts, 'ID' ) );
+			}
+
+			foreach ( $query->posts as $post ) {
+				$meta = [];
+
+				foreach ( $meta_keys as $key ) {
+					$meta[ $key ] = get_post_meta( $post->ID, $key, true );
+				}
+
+				$callback( $post, $meta );
+			}
+		}
 	}
 }
 

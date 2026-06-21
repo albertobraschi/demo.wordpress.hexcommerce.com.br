@@ -3,9 +3,9 @@ Contributors: edge22
 Donate link: https://generateblocks.com
 Tags: blocks, gutenberg, container, headline, grid, columns, page builder, wysiwyg, block editor
 Requires at least: 6.5
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.1.0
+Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,6 +24,53 @@ Check out our [documentation](https://docs.generateblocks.com) for more informat
 To learn how to install GenerateBlocks Pro, check out our documentation [here](https://docs.generateblocks.com/article/installing-generateblocks-pro).
 
 == Changelog ==
+
+= 2.5.0 =
+* Feature: Introduce Carousel block system
+* Feature: Add Global Style usage modal to track where styles are implemented
+* Feature: Add Site Logo URL and Site URL dynamic tags
+* Feature: Add "Has value" and "Has no value" condition operators
+* Feature: Add grid-auto-columns field to Styles Builder
+* Feature: Add grid-auto-rows field to Styles Builder
+* Feature: Add grid-template-areas field to Styles Builder
+* Feature: Add grid-area field to Styles Builder
+* Feature: Add text-wrap field to Styles Builder
+* Feature: Add global CSS values (inherit, initial, revert, revert-layer, unset) to SelectControl components
+* Tweak: Improve tabs accessibility and reliability
+* Tweak: Increase Global Style limit for better performance with large collections
+* Tweak: Enforce template selector sizing overrides
+* Tweak: Allow Global Styles in the Site Header block
+* Fix: Remove HTML from menu item aria-label attributes
+* Fix: Overlay & Condition Dashboard URLs in subsites
+* Fix: Undo behavior in editor when editing styles
+* Fix: Unique ID regeneration when pasting a block before its original
+
+= 2.4.0 =
+* Feature: Integrate Conditions system with blocks
+* Feature: Integrate Conditions system with menu items
+* Feature: Add setting toggle to disable Overlay Panel system
+* Tweak: Standardize user capabilities for Conditions system
+* Tweak: Standardize user capabilities for Overlay Panel system
+* Tweak: Add `generateblocks_conditions_capability` filter
+* Tweak: Add `generateblocks_overlays_capability` filter
+* Tweak: Improve Overlay Panel frontend caching
+* Tweak: Pause/stop media (videos etc...) in Overlay Panels when they close
+* Tweak: Improve time-based conditions
+* Tweak: Set dropdown menu aria-label in HTML
+* Fix: Sticky header positioning on Android
+* Fix: Full width standard overlay panels
+* Fix: Menu item attributes when using hover
+
+= 2.3.0 =
+* Feature: Advanced Overlay Panel system
+* Feature: Advanced Conditions system
+* Feature: Create modals
+* Feature: Create mega menus
+* Feature: Create anchored overlays (popovers, etc...)
+* Feature: Create off-canvas panels
+* Feature: Allow pasting full HTML attributes (name: value) into HTML attribute control
+* Tweak: Make collections not publicly queryable
+* Tweak: Don't add `current-menu-item` class to opened sub-menu parent item
 
 = 2.2.0 =
 * Feature: Navigation block

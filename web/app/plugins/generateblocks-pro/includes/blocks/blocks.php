@@ -25,6 +25,11 @@ function generateblocks_pro_register_blocks() {
 	require_once 'menu-container/menu-container.php';
 	require_once 'menu-toggle/menu-toggle.php';
 	require_once 'site-header/site-header.php';
+	require_once 'carousel/carousel.php';
+	require_once 'carousel-pagination/carousel-pagination.php';
+	require_once 'carousel-items/carousel-items.php';
+	require_once 'carousel-item/carousel-item.php';
+	require_once 'carousel-control/carousel-control.php';
 
 	register_block_type_from_metadata(
 		GENERATEBLOCKS_PRO_DIR . '/dist/blocks/accordion',
@@ -142,6 +147,41 @@ function generateblocks_pro_register_blocks() {
 		GENERATEBLOCKS_PRO_DIR . '/dist/blocks/site-header',
 		[
 			'render_callback' => 'GenerateBlocks_Block_Site_Header::render_block',
+		]
+	);
+
+	register_block_type_from_metadata(
+		GENERATEBLOCKS_PRO_DIR . '/dist/blocks/carousel',
+		[
+			'render_callback' => 'GenerateBlocks_Block_Carousel::render_block',
+		]
+	);
+
+	register_block_type_from_metadata(
+		GENERATEBLOCKS_PRO_DIR . '/dist/blocks/carousel-pagination',
+		[
+			'render_callback' => 'GenerateBlocks_Block_Carousel_Pagination::render_block',
+		]
+	);
+
+	register_block_type_from_metadata(
+		GENERATEBLOCKS_PRO_DIR . '/dist/blocks/carousel-items',
+		[
+			'render_callback' => 'GenerateBlocks_Block_Carousel_Items::render_block',
+		]
+	);
+
+	register_block_type_from_metadata(
+		GENERATEBLOCKS_PRO_DIR . '/dist/blocks/carousel-item',
+		[
+			'render_callback' => 'GenerateBlocks_Block_Carousel_Item::render_block',
+		]
+	);
+
+	register_block_type_from_metadata(
+		GENERATEBLOCKS_PRO_DIR . '/dist/blocks/carousel-control',
+		[
+			'render_callback' => 'GenerateBlocks_Block_Carousel_Control::render_block',
 		]
 	);
 }

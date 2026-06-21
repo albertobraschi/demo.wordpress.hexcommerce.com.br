@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles the Accordion block.
+ * Handles the Tab Items block.
  *
  * @package GenerateBlocksPro
  */

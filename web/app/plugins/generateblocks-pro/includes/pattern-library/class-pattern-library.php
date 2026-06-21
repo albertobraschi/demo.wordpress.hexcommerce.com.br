@@ -55,18 +55,6 @@ if ( class_exists( 'GenerateBlocks_Libraries' ) ) :
 				$libraries = array_merge( array( $pro_library ), $libraries );
 			}
 
-			if ( ! $libraries_instance->exists( $libraries, 'gb_site_headers_beta_library' ) ) {
-				$site_headers_beta_library = ( new GenerateBlocks_Library_DTO() )
-				->set( 'id', 'gb_site_headers_beta_library' )
-				->set( 'name', __( 'Site Headers (Beta)', 'generateblocks-pro' ) )
-				->set( 'domain', 'https://patterns.generatepress.com' )
-				->set( 'public_key', 'VZrk4LgE6Bg8Cpc4rWasuMkOIUCTjfyj' )
-				->set( 'is_enabled', true )
-				->set( 'is_default', true );
-
-				$libraries = array_merge( $libraries, array( $site_headers_beta_library ) );
-			}
-
 			$collections = $this->get_collections();
 
 			$local_libraries = array_map(

@@ -103,12 +103,13 @@ class GenerateBlocks_Pro_Patterns_Post_Type extends GenerateBlocks_Pro_Singleton
 			'gblocks_pattern_collections',
 			array( 'wp_block', 'gblocks_public_keys' ),
 			array(
-				'public'            => true,
-				'show_in_menu'      => true,
-				'show_in_nav_menus' => false,
-				'show_in_rest'      => true,
-				'show_admin_column' => true,
-				'capabilities'      => array(
+				'public'             => true,
+				'publicly_queryable' => false,
+				'show_in_menu'       => true,
+				'show_in_nav_menus'  => false,
+				'show_in_rest'       => true,
+				'show_admin_column'  => true,
+				'capabilities'       => array(
 					'manage_terms' => 'manage_categories',
 					'edit_terms'   => 'manage_categories',
 					'delete_terms' => 'manage_categories',

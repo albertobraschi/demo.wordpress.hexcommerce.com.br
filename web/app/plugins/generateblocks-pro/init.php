@@ -15,6 +15,7 @@ require_once GENERATEBLOCKS_PRO_DIR . 'includes/general.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/generate-css.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/functions.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/deprecated.php';
+require_once GENERATEBLOCKS_PRO_DIR . 'includes/feature-settings.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/class-singleton.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/class-local-templates.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/class-global-styles.php';
@@ -41,4 +42,9 @@ require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/dynamic-tags/class-regist
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/dynamic-tags/class-adjacent-posts.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/interactions/class-tabs.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/interactions/class-accordion.php';
+require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/block-conditions.php';
+require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/menu-item-conditions.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/blocks/blocks.php';
+require_once GENERATEBLOCKS_PRO_DIR . 'includes/conditions/conditions.php';
+require_once GENERATEBLOCKS_PRO_DIR . 'includes/overlays/overlays.php';
+require_once GENERATEBLOCKS_PRO_DIR . 'includes/mega-menus/class-mega-menus.php';

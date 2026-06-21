@@ -120,6 +120,26 @@ class GenerateBlocks_Pro_Dynamic_Tags_Register extends GenerateBlocks_Pro_Single
 
 		new GenerateBlocks_Register_Dynamic_Tag(
 			[
+				'title'    => __( 'Site Logo URL', 'generateblocks-pro' ),
+				'tag'      => 'site_logo_url',
+				'type'     => 'site',
+				'supports' => [],
+				'return'   => [ $this, 'get_site_logo_url' ],
+			]
+		);
+
+		new GenerateBlocks_Register_Dynamic_Tag(
+			[
+				'title'    => __( 'Site URL', 'generateblocks-pro' ),
+				'tag'      => 'site_url',
+				'type'     => 'site',
+				'supports' => [],
+				'return'   => [ $this, 'get_site_url' ],
+			]
+		);
+
+		new GenerateBlocks_Register_Dynamic_Tag(
+			[
 				'title'      => __( 'Loop Index', 'generateblocks-pro' ),
 				'tag'        => 'loop_index',
 				'type'       => 'looper',
@@ -397,6 +417,43 @@ class GenerateBlocks_Pro_Dynamic_Tags_Register extends GenerateBlocks_Pro_Single
 	 */
 	public static function get_site_tagline( $options, $block, $instance ) {
 		$output = get_option( 'blogdescription' );
+
+		return GenerateBlocks_Dynamic_Tag_Callbacks::output( $output, $options, $instance );
+	}
+
+	/**
+	 * Get the site logo URL.
+	 *
+	 * @param array  $options The options.
+	 * @param array  $block The block.
+	 * @param object $instance The block instance.
+	 * @return string
+	 */
+	public static function get_site_logo_url( $options, $block, $instance ) {
+		$custom_logo_id = get_theme_mod( 'custom_logo' );
+		$output = '';
+
+		if ( $custom_logo_id ) {
+			$url = wp_get_attachment_url( $custom_logo_id );
+
+			if ( $url ) {
+				$output = esc_url( $url );
+			}
+		}
+
+		return GenerateBlocks_Dynamic_Tag_Callbacks::output( $output, $options, $instance );
+	}
+
+	/**
+	 * Get the site URL.
+	 *
+	 * @param array  $options The options.
+	 * @param array  $block The block.
+	 * @param object $instance The block instance.
+	 * @return string
+	 */
+	public static function get_site_url( $options, $block, $instance ) {
+		$output = esc_url( site_url() );
 
 		return GenerateBlocks_Dynamic_Tag_Callbacks::output( $output, $options, $instance );
 	}
