@@ -33,6 +33,11 @@ phpunit.xml
 # WP-CLI
 wp-cli.local.yml
 
+dump*
+.sql
+.tar.gz
+.zip
+.gzip
 
 !web/app/plugins/generateblocks
 !web/app/plugins/generateblocks-pro
