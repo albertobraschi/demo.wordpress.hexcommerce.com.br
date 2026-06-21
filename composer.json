@@ -53,9 +53,7 @@
     "wpackagist-plugin/virtuaria-correios": "^1.13",
     "wpackagist-plugin/woo-boost-sales": "^1.2",
     "wpackagist-plugin/woocommerce": "^10.8",
-    "wpackagist-plugin/woocommerce-mercadopago": "^8.7",
-    "wpackagist-theme/astra": "^4.13",
-    "wpackagist-theme/generatepress": "^3.6"
+    "wpackagist-plugin/woocommerce-mercadopago": "^8.7"
   },
   "require-dev": {
     "laravel/pint": "^1.0",
