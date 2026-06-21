@@ -318,7 +318,7 @@ if ( ! function_exists( 'init_bsf_core' ) ) {
 		if ( ! empty( $brainstrom_products ) ) {
 			if ( isset( $brainstrom_products['plugins'] ) ) {
 				foreach ( $brainstrom_products['plugins'] as $key => $value ) {
-					if ( ! array_key_exists( $value['template'], $plugins ) ) {
+					if ( ! isset( $value['template'] ) || ! array_key_exists( $value['template'], $plugins ) ) {
 						unset( $brainstrom_products['plugins'][ $key ] );
 					}
 				}
@@ -326,7 +326,7 @@ if ( ! function_exists( 'init_bsf_core' ) ) {
 
 			if ( isset( $brainstrom_products['themes'] ) ) {
 				foreach ( $brainstrom_products['themes'] as $key => $value ) {
-					if ( ! array_key_exists( $value['template'], $theme_directories ) ) {
+					if ( ! isset( $value['template'] ) || ! array_key_exists( $value['template'], $theme_directories ) ) {
 						unset( $brainstrom_products['themes'][ $key ] );
 					}
 				}
