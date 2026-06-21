@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "921d9f26f5e4f30ed642286435a2e985",
+    "content-hash": "96bca5d6b5312a6cb1d318a08a55f1fd",
     "packages": [
         {
             "name": "composer/installers",
@@ -1150,6 +1150,24 @@
             "homepage": "https://wordpress.org/plugins/shopboost-surprise-hesitating-visitors/"
         },
         {
+            "name": "wpackagist-plugin/ultimate-addons-for-gutenberg",
+            "version": "2.19.28",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/ultimate-addons-for-gutenberg/",
+                "reference": "tags/2.19.28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/ultimate-addons-for-gutenberg.2.19.28.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/ultimate-addons-for-gutenberg/"
+        },
+        {
             "name": "wpackagist-plugin/virtuaria-correios",
             "version": "1.13.4",
             "source": {
@@ -1220,6 +1238,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/woocommerce-mercadopago/"
+        },
+        {
+            "name": "wpackagist-theme/astra",
+            "version": "4.13.4",
+            "source": {
+                "type": "svn",
+                "url": "https://themes.svn.wordpress.org/astra/",
+                "reference": "4.13.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/theme/astra.4.13.4.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-theme",
+            "homepage": "https://wordpress.org/themes/astra/"
         },
         {
             "name": "wpackagist-theme/generatepress",

@@ -42,3 +42,5 @@ dump*
 !web/app/plugins/generateblocks
 !web/app/plugins/generateblocks-pro
 !web/app/plugins/gp-premium
+!web/app/plugins/astra-addon
+!web/app/plugins/spectra-pro

@@ -49,10 +49,12 @@
     "wpackagist-plugin/ewww-image-optimizer": "^8.7",
     "wpackagist-plugin/redis-cache": "^2.8",
     "wpackagist-plugin/shopboost-surprise-hesitating-visitors": "^1.1",
+    "wpackagist-plugin/ultimate-addons-for-gutenberg": "^2.19",
     "wpackagist-plugin/virtuaria-correios": "^1.13",
     "wpackagist-plugin/woo-boost-sales": "^1.2",
     "wpackagist-plugin/woocommerce": "^10.8",
     "wpackagist-plugin/woocommerce-mercadopago": "^8.7",
+    "wpackagist-theme/astra": "^4.13",
     "wpackagist-theme/generatepress": "^3.6"
   },
   "require-dev": {
