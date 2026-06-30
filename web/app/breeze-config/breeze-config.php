@@ -1,7 +1,7 @@
 <?php 
 defined( 'ABSPATH' ) || exit;
 return array (
-  'homepage' => 'https://wordpress.hexcommerce.com.br/wp',
+  'homepage' => 'https://demo-wordpress.hexcommerce.com.br/wp',
   'cache_options' => 
   array (
     'breeze-active' => '1',
@@ -163,7 +163,6 @@
   array (
     'x-frame-options' => 'SAMEORIGIN',
     'referrer-policy' => 'same-origin',
-    'strict-transport-security' => 'max-age=15552000; includeSubDomains; preload',
     'x-content-type-options' => 'nosniff',
     'x-xss-protection' => '1; mode=block',
   ),
