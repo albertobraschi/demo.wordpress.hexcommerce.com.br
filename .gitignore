@@ -44,3 +44,7 @@ dump*
 !web/app/plugins/gp-premium
 !web/app/plugins/astra-addon
 !web/app/plugins/spectra-pro
+!web/app/plugins/sumopaymentplans
+
+.opencode/
+opencode.jsonc
